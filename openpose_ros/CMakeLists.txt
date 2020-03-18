@@ -21,6 +21,7 @@ find_package(OpenCV REQUIRED)
 find_package(GFlags)
 find_package(Glog)
 find_package(OpenPose REQUIRED)
+find_package(Caffe REQUIRED)
 
 catkin_package(
    INCLUDE_DIRS include
@@ -31,7 +32,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${CUDA_INCLUDE_DIRS}
-  ${CAFFE_INCLUDE_DIRS}
+  ${Caffe_INCLUDE_DIRS}
   ${OpenPose_INCLUDE_DIRS} 
   ${GFLAGS_INCLUDE_DIR} 
   ${GLOG_INCLUDE_DIR} 

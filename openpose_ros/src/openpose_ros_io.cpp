@@ -2,23 +2,23 @@
 
 using namespace openpose_ros;
 
-OpenPoseROSIO::OpenPoseROSIO(OpenPose &openPose): nh_("/openpose_ros_node"), it_(nh_)
+OpenPoseROSIO::OpenPoseROSIO(OpenPose &openPose): nh_(""), nhp_("~"), it_(nh_)
 {
     // Subscribe to input video feed and publish human lists as output
     std::string image_topic;
     std::string output_topic;
     std::string input_image_transport_type;
 
-    nh_.param("image_topic", image_topic, std::string("/camera/image_raw"));
-    nh_.param("input_image_transport_type", input_image_transport_type, std::string("raw"));
-    nh_.param("output_topic", output_topic, std::string("/openpose_ros/human_list"));
-    nh_.param("display_output", display_output_flag_, true);
-    nh_.param("print_keypoints", print_keypoints_flag_, false);
-    nh_.param("save_original_video", save_original_video_flag_, false);
-    nh_.param("save_openpose_video", save_openpose_video_flag_, false);
-    nh_.param("original_video_file_name", original_video_file_name_, std::string(""));
-    nh_.param("openpose_video_file_name", openpose_video_file_name_, std::string(""));
-    nh_.param("video_fps", video_fps_, 10);
+    nhp_.param("image_topic", image_topic, std::string("/camera/image_raw"));
+    nhp_.param("input_image_transport_type", input_image_transport_type, std::string("raw"));
+    nhp_.param("output_topic", output_topic, std::string("/openpose_ros/human_list"));
+    nhp_.param("display_output", display_output_flag_, true);
+    nhp_.param("print_keypoints", print_keypoints_flag_, false);
+    nhp_.param("save_original_video", save_original_video_flag_, false);
+    nhp_.param("save_openpose_video", save_openpose_video_flag_, false);
+    nhp_.param("original_video_file_name", original_video_file_name_, std::string(""));
+    nhp_.param("openpose_video_file_name", openpose_video_file_name_, std::string(""));
+    nhp_.param("video_fps", video_fps_, 10);
 
     image_sub_ = it_.subscribe(image_topic, 1, &OpenPoseROSIO::processImage, this, image_transport::TransportHints(input_image_transport_type));
     openpose_human_list_pub_ = nh_.advertise<openpose_ros_msgs::OpenPoseHumanList>(output_topic, 10);

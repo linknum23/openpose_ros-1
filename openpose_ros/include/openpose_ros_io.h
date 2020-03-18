@@ -26,7 +26,7 @@ namespace openpose_ros {
     class OpenPoseROSIO
     {
         private:
-            ros::NodeHandle nh_;
+      ros::NodeHandle nh_, nhp_;
             ros::Publisher openpose_human_list_pub_;
             image_transport::ImageTransport it_;
             image_transport::Subscriber image_sub_;
